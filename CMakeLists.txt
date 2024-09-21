@@ -15,7 +15,12 @@ add_subdirectory(src)
 target_link_libraries(emulatorSignal PUBLIC
         Qt6::Quick
         Qt6::Qml
-        Qt6::Gui)
+        Qt6::Gui
+        emulQml
+        qmlqcustomplot)
 
-target_link_libraries(emulatorSignal PUBLIC emulQml)
-target_link_libraries(emulatorSignal PUBLIC qcustomplot)
+message(${PROJECT_SOURCE_DIR})
+target_include_directories(emulatorSignal PUBLIC
+        "${PROJECT_BINARY_DIR}"
+        "${PROJECT_SOURCE_DIR}/src/qcustomplot"
+)
