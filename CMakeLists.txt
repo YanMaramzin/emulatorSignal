@@ -18,3 +18,4 @@ target_link_libraries(emulatorSignal PUBLIC
         Qt6::Gui)
 
 target_link_libraries(emulatorSignal PUBLIC emulQml)
+target_link_libraries(emulatorSignal PUBLIC qcustomplot)
