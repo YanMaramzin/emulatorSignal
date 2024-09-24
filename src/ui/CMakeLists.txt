@@ -21,6 +21,7 @@ qt_add_qml_module(emulQml
         URI EmulQml
         QML_FILES
         qml/main.qml
+        qml/PlotView.qml
         SOURCES
         model/emullistmodel.h
         model/emullistmodel.cpp

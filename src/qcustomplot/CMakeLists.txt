@@ -1,11 +1,26 @@
 cmake_minimum_required(VERSION 3.28)
-project(qcustomplot)
+project(qmlqcustomplot)
 
-find_package(Qt6 REQUIRED COMPONENTS Core)
+set(CMAKE_AUTOMOC ON)
+
+find_package(Qt6 COMPONENTS Widgets Quick PrintSupport Qml REQUIRED)
 
 add_library(${PROJECT_NAME}
     qcustomplot.h
     qcustomplot.cpp
+    qmlqcustomplot.h
+    qmlqcustomplot.cpp
 )
 
-target_link_libraries(${PROJECT_NAME} Qt6::Core)
+target_link_libraries(${PROJECT_NAME}
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
+    Qt6::PrintSupport
+    Qt6::Qml
+    Qt6::Quick)
+
+target_include_directories(emulatorSignal PUBLIC
+        "${PROJECT_BINARY_DIR}"
+        "${PROJECT_SOURCE_DIR}"
+)
