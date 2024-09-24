@@ -18,9 +18,3 @@ target_link_libraries(emulatorSignal PUBLIC
         Qt6::Gui
         emulQml
         qmlqcustomplot)
-
-message(${PROJECT_SOURCE_DIR})
-target_include_directories(emulatorSignal PUBLIC
-        "${PROJECT_BINARY_DIR}"
-        "${PROJECT_SOURCE_DIR}/src/qcustomplot"
-)
