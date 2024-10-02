@@ -8,6 +8,8 @@ add_library(${PROJECT_NAME}
     customgeneratorparametrs.cpp
     generatorcos.h
     generatorcos.cpp
+    generatorgaussnoise.h
+    generatorgaussnoise.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
