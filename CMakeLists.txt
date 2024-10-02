@@ -13,8 +13,9 @@ add_executable(emulatorSignal main.cpp)
 add_subdirectory(src)
 
 target_link_libraries(emulatorSignal PUBLIC
-        Qt6::Quick
-        Qt6::Qml
-        Qt6::Gui
-        emulQml
-        qmlqcustomplot)
+    Qt6::Quick
+    Qt6::Qml
+    Qt6::Gui
+    emulQml
+    qmlqcustomplot
+    generatorbackend)

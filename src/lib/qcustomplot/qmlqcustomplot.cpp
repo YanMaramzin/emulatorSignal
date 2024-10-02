@@ -1,4 +1,3 @@
-#include "qcustomplot.h"
 #include "qmlqcustomplot.h"
 
 QmlQCustomPlot::QmlQCustomPlot(QQuickItem *parent) : QQuickPaintedItem(parent)
@@ -10,16 +9,11 @@ QmlQCustomPlot::QmlQCustomPlot(QQuickItem *parent) : QQuickPaintedItem(parent)
     connect(this, &QQuickPaintedItem::heightChanged, this, &QmlQCustomPlot::updateCustomPlotSize);
 }
 
-QmlQCustomPlot::~QmlQCustomPlot()
-{
-    if(m_timerId != 0) {
-        killTimer(m_timerId);
-    }
-}
+QmlQCustomPlot::~QmlQCustomPlot() = default;
 
 void QmlQCustomPlot::initCustomPlot()
 {
-    m_customPlot = std::make_unique<QCustomPlot>();
+    m_customPlot = new QCustomPlot();
     updateCustomPlotSize();
     m_customPlot->addGraph();
     m_customPlot->graph(0)->setPen(QPen(Qt::red));
@@ -29,9 +23,8 @@ void QmlQCustomPlot::initCustomPlot()
     m_customPlot->yAxis->setRange(0, 5);
     m_customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 
-    startTimer(500);
-
-    connect(m_customPlot.get(), &QCustomPlot::afterReplot, this, &QmlQCustomPlot::onCustomReplot);
+    connect(m_customPlot, &QCustomPlot::afterReplot, this,
+            &QmlQCustomPlot::onCustomReplot);
 
     m_customPlot->replot();
 }
@@ -54,16 +47,6 @@ void QmlQCustomPlot::routeWheelEvents(QWheelEvent *event)
     // QWheelEvent* newEvent = new QWheelEvent(event->position(), event->globalPosition(), event->pixelDelta(), event->angleDelta(), event->buttons(), event->modifiers(), event->phase(), event->inverted());
     // QCoreApplication::postEvent(m_customPlot.get(), newEvent);
 
-}
-
-void QmlQCustomPlot::timerEvent(QTimerEvent *event)
-{
-    static double t, U;
-    U = ((double)rand() / RAND_MAX) * 5;
-    m_customPlot->graph(0)->addData(t, U);
-    qDebug() << Q_FUNC_INFO << QString("Adding dot t = %1, S = %2").arg(t).arg(U);
-    t++;
-    m_customPlot->replot();
 }
 
 void QmlQCustomPlot::mousePressEvent(QMouseEvent *event)
@@ -116,4 +99,14 @@ void QmlQCustomPlot::paint(QPainter *painter)
     m_customPlot->toPainter(&qcpPainter);
 
     painter->drawPixmap(QPoint(), picture);
+}
+
+QCustomPlot *QmlQCustomPlot::customPlot()
+{
+    return m_customPlot;
+}
+
+void QmlQCustomPlot::setCustomPlot(QCustomPlot *plot)
+{
+    m_customPlot = plot;
 }

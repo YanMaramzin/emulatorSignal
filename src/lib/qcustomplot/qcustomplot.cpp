@@ -6064,7 +6064,7 @@ void QCPLabelPainterPrivate::analyzeFontMetrics()
 //////////////////// QCPAxisTicker
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /*! \class QCPAxisTicker
-  \brief The base class tick generator used by QCPAxis to create tick positions and tick labels
+  \brief The base class tick generatorbackend used by QCPAxis to create tick positions and tick labels
   
   Each QCPAxis has an internal QCPAxisTicker (or a subclass) in order to generate tick positions
   and tick labels for the current axis range. The ticker of an axis can be set via \ref
@@ -6513,7 +6513,7 @@ double QCPAxisTicker::cleanMantissa(double input) const
   9:45 of every year.
   
   The ticker can be created and assigned to an axis like this:
-  \snippet documentation/doc-image-generator/mainwindow.cpp axistickerdatetime-creation
+  \snippet documentation/doc-image-generatorbackend/mainwindow.cpp axistickerdatetime-creation
   
   \note If you rather wish to display relative times in terms of days, hours, minutes, seconds and
   milliseconds, and are not interested in the intricacies of real calendar dates with months and
@@ -6861,7 +6861,7 @@ double QCPAxisTickerDateTime::dateTimeToKey(const QDate &date, Qt::TimeSpec time
   zero will carry a leading minus sign.
   
   The ticker can be created and assigned to an axis like this:
-  \snippet documentation/doc-image-generator/mainwindow.cpp axistickertime-creation
+  \snippet documentation/doc-image-generatorbackend/mainwindow.cpp axistickertime-creation
   
   Here is an example of a time axis providing time information in days, hours and minutes. Due to
   the axis range spanning a few days and the wanted tick count (\ref setTickCount), the ticker
@@ -6870,7 +6870,7 @@ double QCPAxisTickerDateTime::dateTimeToKey(const QDate &date, Qt::TimeSpec time
   \image html axisticker-time2.png
   
   The format string for this example is
-  \snippet documentation/doc-image-generator/mainwindow.cpp axistickertime-creation-2
+  \snippet documentation/doc-image-generatorbackend/mainwindow.cpp axistickertime-creation-2
   
   \note If you rather wish to display calendar dates and times, have a look at QCPAxisTickerDateTime
   instead.
@@ -7106,7 +7106,7 @@ void QCPAxisTickerTime::replaceUnit(QString &text, QCPAxisTickerTime::TimeUnit u
   because despite the name it is not limited to only pi symbols/values.
   
   The ticker can be created and assigned to an axis like this:
-  \snippet documentation/doc-image-generator/mainwindow.cpp axistickerfixed-creation
+  \snippet documentation/doc-image-generatorbackend/mainwindow.cpp axistickerfixed-creation
 */
 
 /*!
@@ -7208,7 +7208,7 @@ double QCPAxisTickerFixed::getTickStep(const QCPRange &range)
   QCPAxisTicker, instead of using this one.
   
   The ticker can be created and assigned to an axis like this:
-  \snippet documentation/doc-image-generator/mainwindow.cpp axistickertext-creation
+  \snippet documentation/doc-image-generatorbackend/mainwindow.cpp axistickertext-creation
 */
 
 /* start of documentation of inline functions */
@@ -7421,7 +7421,7 @@ QVector<double> QCPAxisTickerText::createTickVector(double tickStep, const QCPRa
   tick label can be configured with \ref setFractionStyle.
   
   The ticker can be created and assigned to an axis like this:
-  \snippet documentation/doc-image-generator/mainwindow.cpp axistickerpi-creation
+  \snippet documentation/doc-image-generatorbackend/mainwindow.cpp axistickerpi-creation
 */
 
 /*!
@@ -7712,7 +7712,7 @@ QString QCPAxisTickerPi::unicodeSubscript(int number) const
   \image html axisticker-log-powers.png
 
   The ticker can be created and assigned to an axis like this:
-  \snippet documentation/doc-image-generator/mainwindow.cpp axistickerlog-creation
+  \snippet documentation/doc-image-generatorbackend/mainwindow.cpp axistickerlog-creation
   
   Note that the nature of logarithmic ticks imply that there exists a smallest possible tick step,
   corresponding to one multiplication by the log base. If the user zooms in further than that, no
@@ -23989,7 +23989,7 @@ double QCPCurve::pointDistance(const QPointF &pixelPoint, QCPCurveDataContainer:
   \section qcpbarsgroup-example Example
   
   The image above is generated with the following code:
-  \snippet documentation/doc-image-generator/mainwindow.cpp qcpbarsgroup-example
+  \snippet documentation/doc-image-generatorbackend/mainwindow.cpp qcpbarsgroup-example
 */
 
 /* start of documentation of inline functions */
