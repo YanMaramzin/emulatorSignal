@@ -1,8 +1,7 @@
 #pragma once
 
 #include <QtQuick>
-
-class QCustomPlot;
+#include "qcustomplot.h"
 class QCPAbstractPlottable;
 
 class QmlQCustomPlot : public QQuickPaintedItem
@@ -17,11 +16,15 @@ public:
     void paint(QPainter *painter) override;
 
     Q_INVOKABLE void initCustomPlot();
+
+    Q_INVOKABLE QCustomPlot *customPlot();
+    Q_INVOKABLE void setCustomPlot(QCustomPlot *plot);
+
 protected:
     void routeMouseEvents(QMouseEvent *event);
     void routeWheelEvents(QWheelEvent *event);
 
-    virtual void timerEvent(QTimerEvent *event) override;
+//    virtual void timerEvent(QTimerEvent *event) override;
 
     virtual void mousePressEvent(QMouseEvent *event) override;
     virtual void mouseReleaseEvent(QMouseEvent *event) override;
@@ -30,8 +33,7 @@ protected:
     virtual void wheelEvent(QWheelEvent *event) override;
 
 private:
-    std::unique_ptr<QCustomPlot> m_customPlot {nullptr};
-    int m_timerId {0};
+    QCustomPlot *m_customPlot {nullptr};
     void graphClicked(QCPAbstractPlottable *plottable);
     void updateCustomPlotSize() const;
     void onCustomReplot();

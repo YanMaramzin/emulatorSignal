@@ -18,9 +18,10 @@ target_link_libraries(${PROJECT_NAME}
     Qt6::Widgets
     Qt6::PrintSupport
     Qt6::Qml
-    Qt6::Quick)
+    Qt6::Quick
+)
 
-target_include_directories(emulatorSignal PUBLIC
-        "${PROJECT_BINARY_DIR}"
-        "${PROJECT_SOURCE_DIR}"
+target_include_directories(${PROJECT_NAME} PUBLIC
+    "${PROJECT_BINARY_DIR}"
+    "${PROJECT_SOURCE_DIR}"
 )
