@@ -12,7 +12,7 @@ public:
     ~GeneratorCos() override = default;
 
     void generate(CustomGeneratorParametrs &parameters) override;
-    std::vector<double> &values();
+    std::vector<double> &values() override;
     CustomGeneratorParametrs &parametrs();
 
 private:
