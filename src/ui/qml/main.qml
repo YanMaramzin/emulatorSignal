@@ -22,16 +22,20 @@ ApplicationWindow {
             id: bar
             width: parent.width
             TabButton {
-                text: qsTr("Home")
+                text: qsTr("Генератор")
             }
             TabButton {
-                text: qsTr("Генератор")
+                text: qsTr("Home")
             }
         }
 
         contentItem: StackLayout {
             width: parent.width
             currentIndex: bar.currentIndex
+            GeneratorPage {
+                width: window.width
+                height: window.height
+            }
             Item {
                 Page {
                     ColumnLayout {
@@ -73,10 +77,6 @@ ApplicationWindow {
                         }
                     }
                 }
-            }
-            GeneratorPage {
-                width: window.width
-                height: window.height
             }
         }
     }

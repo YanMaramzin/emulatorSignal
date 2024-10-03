@@ -32,3 +32,13 @@ double CustomGeneratorParametrs::phase() const
 {
     return m_phase;
 }
+
+void CustomGeneratorParametrs::setDuration(const double value)
+{
+    m_duration = value;
+}
+
+double CustomGeneratorParametrs::duration() const
+{
+    return m_duration;
+}

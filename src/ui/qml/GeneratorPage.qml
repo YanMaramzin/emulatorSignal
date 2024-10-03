@@ -55,6 +55,25 @@ Item {
                     }
                 }
 
+                Label {
+                    text: qsTr("Длительность, с")
+                }
+                Rectangle {
+                    width: 200
+                    height: 20
+                    color: "lightgrey"
+                    border.color: "grey"
+                    TextInput {
+                        anchors.fill: parent
+                        text: backend.duration
+                        validator: DoubleValidator {
+                            bottom: 10; top: 20
+                        }
+
+                        onTextChanged: backend.duration = text
+                    }
+                }
+
                 Button {
                     text: qsTr("Перерисовать")
                     onClicked: {

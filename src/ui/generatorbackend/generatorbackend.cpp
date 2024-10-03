@@ -1,4 +1,5 @@
 #include <generatorcos.h>
+#include <generatorgaussnoise.h>
 #include "generatorbackend.h"
 
 namespace emulatorSignal {
@@ -13,19 +14,20 @@ GeneratorBackend::GeneratorBackend(QObject *parent) : QObject(parent)
 void GeneratorBackend::replot()
 {
     m_customplot->customPlot()->clearGraphs();
-    qDebug() << "REPLOT";
     CustomGeneratorParametrs parametrs;
     parametrs.setAmplitude(m_amplitude);
     parametrs.setFrequency(m_frequency);
+    parametrs.setDuration(m_duration);
 
     GeneratorCos cos;
     cos.generate(parametrs);
+    GeneratorGaussNoise noise;
+    noise.generate(parametrs);
     m_customplot->customPlot()->addGraph();
-    for (size_t i = 0; i < cos.values().size(); ++i) {
-        auto key = (i * 1.0) /  cos.values().size();
-        m_customplot->customPlot()->graph(0)->addData(key, cos.values()[i]);
-    }
-    m_customplot->customPlot()->graph(0)->rescaleAxes(true);
+    for (size_t i = 0; i < cos.values().size(); ++i)
+        m_customplot->customPlot()->graph(0)->addData(i * parametrs.step(), cos.values()[i]);
+
+    m_customplot->customPlot()->graph(0)->rescaleAxes();
     m_customplot->customPlot()->replot();
 }
 
@@ -40,7 +42,7 @@ void GeneratorBackend::replot()
      cos.generate(parametrs);
      for(size_t i = 0; i < cos.values().size(); ++i) {
          auto key = (i * 1.0) /  cos.values().size();
-         m_customplot->customPlot()->graph(0)->addData(key, cos.values()[i]);
+         m_customplot->customPlot()->graph(0)->addData(key, 100 * cos.values()[i]);
      }
      m_customplot->customPlot()->graph(0)->rescaleAxes(true);
      return m_customplot->customPlot();
@@ -74,6 +76,15 @@ void GeneratorBackend::setFrequency(double value)
     emit frequencyChanged();
 }
 
+void GeneratorBackend::setDuration(double value)
+{
+    if (value == m_duration)
+        return;
+
+    m_duration = value;
+    emit durationChanged();
+}
+
 QCustomPlot *GeneratorBackend::customPlot()
 {
     return m_customplot->customPlot();
@@ -82,6 +93,11 @@ QCustomPlot *GeneratorBackend::customPlot()
 void GeneratorBackend::setQCustomPlot(QmlQCustomPlot *customplot)
 {
     m_customplot = customplot;
+}
+
+double GeneratorBackend::duration() const
+{
+    return m_duration;
 }
 
 }
