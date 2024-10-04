@@ -1,5 +1,7 @@
 #include <generatorcos.h>
 #include <generatorgaussnoise.h>
+#include <generatoram.h>
+#include <generatoramparametrs.h>
 #include "generatorbackend.h"
 
 namespace emulatorSignal {
@@ -19,13 +21,23 @@ void GeneratorBackend::replot()
     parametrs.setFrequency(m_frequency);
     parametrs.setDuration(m_duration);
 
+    GeneratorAmParametrs amParametrs;
+    amParametrs.setCarrierFrequency(100);
+    amParametrs.setAmplitude(m_amplitude);
+    amParametrs.setFrequency(m_frequency);
+    amParametrs.setDuration(m_duration);
+    amParametrs.setModultionCoefficient(0.5);
+
     GeneratorCos cos;
     cos.generate(parametrs);
     GeneratorGaussNoise noise;
     noise.generate(parametrs);
+    GeneratorAm am;
+    amParametrs.setMessage(cos.values());
+    am.generate(amParametrs);
     m_customplot->customPlot()->addGraph();
-    for (size_t i = 0; i < cos.values().size(); ++i)
-        m_customplot->customPlot()->graph(0)->addData(i * parametrs.step(), cos.values()[i]);
+    for (size_t i = 0; i < am.values().size(); ++i)
+        m_customplot->customPlot()->graph(0)->addData(i * amParametrs.step(), am.values()[i]);
 
     m_customplot->customPlot()->graph(0)->rescaleAxes();
     m_customplot->customPlot()->replot();
