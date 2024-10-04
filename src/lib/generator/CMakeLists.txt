@@ -10,6 +10,10 @@ add_library(${PROJECT_NAME}
     generatorcos.cpp
     generatorgaussnoise.h
     generatorgaussnoise.cpp
+    generatoram.h
+    generatoram.cpp
+    generatoramparametrs.h
+    generatoramparametrs.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
